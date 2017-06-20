@@ -1,0 +1,119 @@
+﻿@model IEnumerable<BugTracker.Models.Ticket>
+@{
+    Layout = null;
+}
+
+<!-- Bootstrap -->
+<link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<!-- NProgress -->
+<link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+<!-- iCheck -->
+<link href="~/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+<!-- Custom Theme Style -->
+<link href="~/build/css/custom.min.css" rel="stylesheet">
+<!-- Data table-->
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+
+<h2>Index</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table id="mytable" class="table">
+    <thead>
+        <tr>
+            
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedToUser.FullName)
+           </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPriority.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketStatus.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketType.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>
+            <th></th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignedToUser.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                    @*@Url.Action("Edit", "Projects", new { id = item.Id })*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+              
+                    @*@Url.Action("Details", "Projects", new {id = item.Id})*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketType.Name)
+                    @*@Url.Action("Delete", "Projects", new { id=item.Id })*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                    @*@Url.Action("AssignProjects","AdminProjectAssign", new { projectId = item.Id }, null)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated)
+                    @*@Url.Action( "Create", "Tickets", new { id = item.Id}, null)*@
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Tickets", new { id = item.Id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                    <a href="@Url.Action("Details", "Tickets", new {id = item.Id})" class="btn btn-info btn-xs"><i class="fa fa-info"></i> Detail </a>
+                    <a href="@Url.Action("Delete", "Tickets", new { id=item.Id })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                    <a href="@Url.Action("Create","TicketComments", new { id = item.Id }, null)" class="btn btn-danger btn-xs"><i class="fa fa-comments"></i> Comment </a>
+                    <a href="@Url.Action( "Create", "TicketAttachments", new { id = item.Id}, null)" class="btn btn-danger btn-xs"><i class="fa fa-plus"></i> Attachment </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2 style="margin-left:25px;">@Html.ActionLink("Back to Homepage", "Index", "Home")</h2>
+
+<!-- jQuery -->
+<script src="~/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="~/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="~/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="~/vendors/nprogress/nprogress.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="~/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="~/build/js/custom.min.js"></script>
+
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script>$('#mytable').DataTable();</script>

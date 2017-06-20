@@ -1,0 +1,27 @@
+﻿@model BugTracker.Models.AdminProjectAssignModel
+
+@{
+    ViewBag.Title = "AdminAssignProject";
+}
+<h2>Assign projects</h2>
+@using (Html.BeginForm("AssignProjects", "AdminProjectAssign", FormMethod.Post))
+{
+    @Html.HiddenFor(model=> model.project.Id)
+
+    @Html.AntiForgeryToken()
+
+
+    <tr>
+        <td>
+           
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.user.FullName)
+        </td>
+    </tr>
+
+        <div>
+            @Html.ListBox("SelectedUsers", Model.ProjUsers)
+        </div>
+        <input type="submit" value="Assign project" class="btn btn-primary" />
+}

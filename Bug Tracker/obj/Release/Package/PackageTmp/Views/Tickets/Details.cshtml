@@ -1,0 +1,175 @@
+﻿@model BugTracker.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <h4>Ticket</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.LabelFor(model => model.AssignedToUserId)
+                    @*@Html.DisplayNameFor(model => model.AssignedToUser.FirstName)*@
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AssignedToUser.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.OwnerUserId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OwnerUser.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Project.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Project.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TicketPriority.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TicketPriority.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TicketStatus.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TicketStatus.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TicketType.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TicketType.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Updated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated)
+                </dd>
+
+                <dt>
+                    @Html.LabelFor(model => model.TicketAttachments, "Add Attachments")
+                </dt>
+
+                @foreach (var item in Model.TicketAttachments)
+            {
+                    <dd>
+                        <p>Craeted on : @item.Created</p>
+                        <p>Attachment:<a href="@Url.Content(item.FileUrl)">@item.FileUrl</a></p>
+                        <p>Description: @item.Description</p>
+                        <br />
+                    </dd>
+                }
+                <dt>
+                    @Html.LabelFor(model => model.TicketComments, "Add Comments")
+                </dt>
+
+                @foreach (var comment in Model.TicketComments)
+            {
+
+                    <dd>
+                        <p>@comment.Created</p>
+                        <p>@comment.User.FullName</p>
+                        <p>@Html.Raw(comment.Comment)</p>
+                        <br />
+                    </dd>
+                }
+
+
+            </dl>
+        </div>
+        
+
+        <div class="col-md-6">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2> Ticket Recent Activities <small>Sessions</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                       
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <ul class="list-unstyled timeline widget">
+                           @foreach (var history in Model.TicketHistories)
+                           {
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>@history.Property</a>
+                                        </h2>
+                                        <p class="excerpt">
+                                            @history.NewValue
+                                        </p>
+                                        <div class="byline">
+                                            <span>@history.Changed</span> by <a>@history.User.FullName</a>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </li>
+                           }
+                        </ul>
+                    </div>
+                </div>
+                @*@foreach (var history in Model.TicketHistories)
+            {
+                    @history.Changed
+                    @history.OldValue
+                    <p>changed to </p> 
+                }*@
+            </div>
+        </div>
+
+        <div class="row">
+            <p>
+                @Html.ActionLink("Add a comment", "Create", "TicketComments", new { id = Model.Id }, null) |
+                @Html.ActionLink("Add an attachment", "Create", "TicketAttachments", new { id = Model.Id }, null) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+    
